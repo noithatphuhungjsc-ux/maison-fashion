@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Toaster } from 'sonner'
+import ContactWidget from '@/components/layout/ContactWidget'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -18,6 +19,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="vi" className="dark">
       <body>
         {children}
+        <ContactWidget />
         <Toaster
           position="bottom-center"
           toastOptions={{

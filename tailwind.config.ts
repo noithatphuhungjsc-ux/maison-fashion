@@ -30,7 +30,7 @@ const config: Config = {
         },
       },
       fontFamily: {
-        serif: ['Cormorant Garamond', 'Georgia', 'serif'],
+        serif: ['Playfair Display', 'Georgia', 'serif'],
         sans: ['DM Sans', 'sans-serif'],
         mono: ['DM Mono', 'monospace'],
       },
