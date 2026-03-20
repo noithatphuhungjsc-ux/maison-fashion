@@ -1,22 +1,23 @@
-import type { Metadata } from 'next'
-import { getProducts, getCategories, getReviews } from '@/lib/queries'
-import AdminDashboard from './AdminDashboard'
+'use client'
+import { useAuth } from '@/store/auth'
+import AdminLayout from './AdminLayout'
+import ManagerDashboard from './dashboards/ManagerDashboard'
+import CustomerDashboard from './dashboards/CustomerDashboard'
+import WorkshopDashboard from './dashboards/WorkshopDashboard'
 
-export const metadata: Metadata = { title: 'Admin Dashboard' }
-export const revalidate = 0 // always fresh
-
-export default async function AdminPage() {
-  const [products, categories, reviews] = await Promise.all([
-    getProducts(),
-    getCategories(),
-    getReviews(),
-  ])
+export default function AdminPage() {
+  const { profile } = useAuth()
 
   return (
-    <AdminDashboard
-      products={products}
-      categories={categories}
-      reviews={reviews}
-    />
+    <AdminLayout>
+      {profile?.role === 'manager' && <ManagerDashboard />}
+      {profile?.role === 'customer' && <CustomerDashboard />}
+      {profile?.role === 'workshop' && <WorkshopDashboard />}
+      {!profile?.role && (
+        <div className="flex items-center justify-center h-64">
+          <p className="text-muted">Dang tai...</p>
+        </div>
+      )}
+    </AdminLayout>
   )
 }

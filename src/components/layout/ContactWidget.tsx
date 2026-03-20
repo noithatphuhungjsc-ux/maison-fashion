@@ -110,15 +110,6 @@ export default function ContactWidget() {
       {/* Contact channels popup */}
       {open && !chatOpen && (
         <div className="fixed bottom-24 right-5 md:right-8 z-[300] space-y-2">
-          {/* Chatbot button */}
-          <button
-            onClick={() => { setChatOpen(true); setOpen(false) }}
-            className="flex items-center gap-3 bg-[#131210] border border-white/13 pl-4 pr-5 py-3 rounded-full shadow-lg hover:border-[#c8a96e] transition-colors w-full"
-          >
-            <span className="text-xl">🤖</span>
-            <span className="text-[13px] text-[#f0ede6]">Chat với MAISON Bot</span>
-          </button>
-
           {CHANNELS.map(ch => (
             <a
               key={ch.name}
@@ -131,6 +122,17 @@ export default function ContactWidget() {
               <span className="text-[13px] text-[#f0ede6]">{ch.name}</span>
             </a>
           ))}
+
+          {/* Chatbot button - separated below */}
+          <div className="pt-1 border-t border-white/7">
+            <button
+              onClick={() => { setChatOpen(true); setOpen(false) }}
+              className="flex items-center gap-3 bg-[#1a1916] border border-[#c8a96e]/30 pl-4 pr-5 py-3 rounded-full shadow-lg hover:border-[#c8a96e] transition-colors w-full mt-2"
+            >
+              <span className="text-xl">🤖</span>
+              <span className="text-[13px] text-[#c8a96e] font-medium">Chat với MAISON Bot</span>
+            </button>
+          </div>
         </div>
       )}
 

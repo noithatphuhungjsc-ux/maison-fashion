@@ -130,3 +130,76 @@ export interface OrderItemRow {
   qty: number
   image_url: string | null
 }
+
+// =============================================
+// Role-Based Admin Types
+// =============================================
+
+export type UserRole = 'customer' | 'manager' | 'workshop'
+
+export interface UserRow {
+  id: string
+  email: string
+  full_name: string | null
+  phone: string | null
+  avatar_url: string | null
+  role: UserRole
+  workshop_name: string | null
+  workshop_address: string | null
+  is_active: boolean
+  created_at: string
+  updated_at: string
+}
+
+export type WorkshopOrderStatus =
+  | 'pending'
+  | 'cutting'
+  | 'sewing'
+  | 'finishing'
+  | 'quality_check'
+  | 'completed'
+  | 'rejected'
+
+export type WorkshopPriority = 'low' | 'normal' | 'high' | 'urgent'
+
+export interface WorkshopOrderRow {
+  id: string
+  order_id: string | null
+  workshop_id: string | null
+  assigned_by: string | null
+  status: WorkshopOrderStatus
+  priority: WorkshopPriority
+  product_name: string
+  quantity: number
+  size: string | null
+  notes: string | null
+  due_date: string | null
+  started_at: string | null
+  completed_at: string | null
+  created_at: string
+  updated_at: string
+}
+
+// Status labels in Vietnamese
+export const WORKSHOP_STATUS_LABELS: Record<WorkshopOrderStatus, string> = {
+  pending: 'Cho xu ly',
+  cutting: 'Dang cat',
+  sewing: 'Dang may',
+  finishing: 'Hoan thien',
+  quality_check: 'Kiem tra CL',
+  completed: 'Hoan thanh',
+  rejected: 'Tu choi',
+}
+
+export const PRIORITY_LABELS: Record<WorkshopPriority, string> = {
+  low: 'Thap',
+  normal: 'Binh thuong',
+  high: 'Cao',
+  urgent: 'Khan cap',
+}
+
+export const ROLE_LABELS: Record<UserRole, string> = {
+  customer: 'Khach hang',
+  manager: 'Quan ly',
+  workshop: 'Xuong ve tinh',
+}
