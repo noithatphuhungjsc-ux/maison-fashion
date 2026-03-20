@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FitFlow Platform — Tổng hợp Dự án</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f0e0c;
+    --paper: #f7f4ef;
+    --gold: #c9a84c;
+    --gold-light: #e8d5a3;
+    --rust: #b5451b;
+    --sage: #4a6741;
+    --muted: #7a7570;
+    --line: #e2ddd6;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+  }
+
+  /* COVER */
+  .cover {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 60px;
+    border-bottom: 3px solid var(--ink);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cover::before {
+    content: 'FITFLOW';
+    position: absolute;
+    right: -40px;
+    top: 50%;
+    transform: translateY(-50%) rotate(90deg);
+    font-family: 'Playfair Display', serif;
+    font-size: 160px;
+    font-weight: 900;
+    color: var(--gold-light);
+    opacity: 0.3;
+    letter-spacing: 20px;
+    pointer-events: none;
+  }
+
+  .cover-tag {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+  }
+
+  .cover h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(42px, 6vw, 80px);
+    font-weight: 900;
+    line-height: 1.05;
+    max-width: 700px;
+    margin-bottom: 32px;
+  }
+
+  .cover h1 span {
+    color: var(--gold);
+  }
+
+  .cover-desc {
+    font-size: 17px;
+    max-width: 520px;
+    color: var(--muted);
+    border-left: 3px solid var(--gold);
+    padding-left: 20px;
+    margin-bottom: 48px;
+  }
+
+  .cover-stats {
+    display: flex;
+    gap: 48px;
+    flex-wrap: wrap;
+  }
+
+  .stat-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  .stat-label {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* SECTIONS */
+  .section {
+    padding: 72px 60px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+
+  .section-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    font-weight: 900;
+    color: var(--gold-light);
+    line-height: 1;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  /* ADVANTAGE BOX */
+  .advantage-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+  }
+
+  .adv-card {
+    background: white;
+    border: 1px solid var(--line);
+    border-top: 3px solid var(--gold);
+    padding: 28px;
+  }
+
+  .adv-icon {
+    font-size: 28px;
+    margin-bottom: 12px;
+  }
+
+  .adv-title {
+    font-weight: 600;
+    font-size: 15px;
+    margin-bottom: 8px;
+  }
+
+  .adv-desc {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* PILLARS */
+  .pillars {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2px;
+    background: var(--ink);
+  }
+
+  .pillar {
+    background: var(--paper);
+    padding: 32px 28px;
+  }
+
+  .pillar-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 64px;
+    font-weight: 900;
+    color: var(--gold-light);
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+
+  .pillar-title {
+    font-weight: 600;
+    font-size: 15px;
+    margin-bottom: 10px;
+    color: var(--ink);
+  }
+
+  .pillar-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* FLOW */
+  .flow {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .flow-step {
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    gap: 24px;
+    align-items: start;
+    padding: 20px 0;
+    border-bottom: 1px dashed var(--line);
+  }
+
+  .flow-step:last-child { border-bottom: none; }
+
+  .flow-num {
+    width: 48px;
+    height: 48px;
+    background: var(--ink);
+    color: var(--paper);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .flow-content-title {
+    font-weight: 600;
+    font-size: 15px;
+    margin-bottom: 4px;
+  }
+
+  .flow-content-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  .flow-tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+
+  .tag-ai { background: var(--gold-light); color: #7a5c00; }
+  .tag-auto { background: #d4ecd0; color: var(--sage); }
+  .tag-human { background: #fde8e0; color: var(--rust); }
+
+  /* ROLES */
+  .roles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+  }
+
+  .role-card {
+    border: 1px solid var(--line);
+    overflow: hidden;
+  }
+
+  .role-header {
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .role-icon { font-size: 22px; }
+
+  .role-name {
+    font-weight: 600;
+    font-size: 15px;
+  }
+
+  .role-sub {
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .role-features {
+    padding: 16px 20px;
+    background: white;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .role-features li {
+    font-size: 13px;
+    color: var(--muted);
+    padding-left: 16px;
+    position: relative;
+  }
+
+  .role-features li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+  }
+
+  .color-customer .role-header { background: #fef9ec; border-bottom: 2px solid var(--gold); }
+  .color-workshop .role-header { background: #edf4ec; border-bottom: 2px solid var(--sage); }
+  .color-design .role-header { background: #fdeee9; border-bottom: 2px solid var(--rust); }
+  .color-qc .role-header { background: #eef3fb; border-bottom: 2px solid #4a7ab5; }
+  .color-supplier .role-header { background: #f4edfb; border-bottom: 2px solid #7a4ab5; }
+  .color-admin .role-header { background: #0f0e0c; border-bottom: 2px solid var(--gold); }
+  .color-admin .role-name, .color-admin .role-sub { color: var(--paper); }
+
+  /* AI */
+  .ai-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    background: var(--ink);
+  }
+
+  .ai-item {
+    background: var(--paper);
+    padding: 24px 28px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .ai-item-title {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+
+  .ai-item-desc {
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .ai-level {
+    display: flex;
+    gap: 4px;
+  }
+
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--line);
+  }
+
+  .dot.filled { background: var(--gold); }
+
+  /* TECH LAYERS */
+  .tech-layer {
+    border: 1px solid var(--line);
+    margin-bottom: 12px;
+    overflow: hidden;
+  }
+
+  .tech-layer-header {
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: white;
+  }
+
+  .tech-layer-title {
+    font-weight: 600;
+    font-size: 15px;
+  }
+
+  .tech-badge {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 20px;
+  }
+
+  .badge-core { background: var(--ink); color: var(--gold); }
+  .badge-network { background: var(--sage); color: white; }
+  .badge-ai { background: var(--gold); color: var(--ink); }
+
+  .tech-layer-body {
+    padding: 16px 24px;
+    font-size: 13px;
+    color: var(--muted);
+    border-top: 1px solid var(--line);
+  }
+
+  /* ROADMAP */
+  .roadmap {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    background: var(--ink);
+  }
+
+  .phase {
+    background: var(--paper);
+    padding: 32px 28px;
+  }
+
+  .phase-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+
+  .phase-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .phase-period {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+
+  .phase-tasks {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .phase-tasks li {
+    font-size: 13px;
+    padding-left: 18px;
+    position: relative;
+    line-height: 1.5;
+  }
+
+  .phase-tasks li::before {
+    content: '✦';
+    position: absolute;
+    left: 0;
+    font-size: 9px;
+    top: 3px;
+    color: var(--gold);
+  }
+
+  .phase-kpi {
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
+    font-size: 12px;
+    color: var(--rust);
+    font-weight: 500;
+  }
+
+  /* RISKS */
+  .risk-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .risk-table th {
+    text-align: left;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 12px 16px;
+    border-bottom: 2px solid var(--ink);
+  }
+
+  .risk-table td {
+    padding: 16px;
+    font-size: 14px;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+
+  .risk-table tr:last-child td { border-bottom: none; }
+
+  .risk-level {
+    display: inline-block;
+    padding: 3px 10px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+
+  .risk-high { background: #fde8e0; color: var(--rust); }
+  .risk-mid { background: #fef9ec; color: #7a5c00; }
+
+  /* VISION */
+  .vision {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 72px 60px;
+    text-align: center;
+  }
+
+  .vision h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 5vw, 60px);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 24px;
+  }
+
+  .vision h2 span { color: var(--gold); }
+
+  .vision p {
+    font-size: 17px;
+    color: #9a9590;
+    max-width: 560px;
+    margin: 0 auto 48px;
+    line-height: 1.7;
+  }
+
+  .vision-metrics {
+    display: flex;
+    justify-content: center;
+    gap: 64px;
+    flex-wrap: wrap;
+  }
+
+  .v-metric-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 40px;
+    font-weight: 700;
+    color: var(--gold);
+  }
+
+  .v-metric-label {
+    font-size: 12px;
+    color: #9a9590;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  /* QUOTE */
+  .key-insight {
+    background: var(--gold);
+    padding: 40px 60px;
+    text-align: center;
+  }
+
+  .key-insight p {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(18px, 2.5vw, 26px);
+    font-weight: 700;
+    color: var(--ink);
+    max-width: 760px;
+    margin: 0 auto;
+    line-height: 1.4;
+  }
+
+  @media (max-width: 640px) {
+    .cover, .section { padding: 48px 24px; }
+    .ai-grid { grid-template-columns: 1fr; }
+    .roadmap { grid-template-columns: 1fr; }
+    .cover::before { display: none; }
+    .vision { padding: 48px 24px; }
+    .key-insight { padding: 32px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-tag">Tài liệu chiến lược · 2025–2026</div>
+  <h1>Nền tảng May mặc<br><span>Theo Yêu Cầu</span><br>Dẫn Đầu Bởi AI</h1>
+  <p class="cover-desc">Kết nối khách hàng ngoại cỡ — mạng lưới xưởng vệ tinh — nhà cung ứng nguyên liệu thành một hệ sinh thái may mặc thông minh, vận hành tự động.</p>
+  <div class="cover-stats">
+    <div class="stat-item">
+      <div class="stat-num">7</div>
+      <div class="stat-label">Vai trò trong hệ thống</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">5</div>
+      <div class="stat-label">Lõi vận hành</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">3</div>
+      <div class="stat-label">Giai đoạn triển khai</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">80%</div>
+      <div class="stat-label">Mục tiêu tự động hóa</div>
+    </div>
+  </div>
+</div>
+
+<!-- 1. LỢI THẾ CỐT LÕI -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">01</div>
+    <div class="section-title">Lợi thế Cạnh tranh Cốt lõi</div>
+  </div>
+  <div class="advantage-grid">
+    <div class="adv-card">
+      <div class="adv-icon">🎯</div>
+      <div class="adv-title">Phân khúc bị bỏ ngỏ</div>
+      <div class="adv-desc">Người béo, người gầy — nhu cầu may vừa vặn rất lớn nhưng thị trường thời trang đại trà không phục vụ được. Đây là "vùng trắng" cạnh tranh thấp, nhu cầu cao.</div>
+    </div>
+    <div class="adv-card">
+      <div class="adv-icon">⚡</div>
+      <div class="adv-title">Đơn nhỏ — chi phí loạt</div>
+      <div class="adv-desc">Năng lực may đơn hàng nhỏ với chi phí như sản xuất loạt là lợi thế kỹ thuật hiếm có. Đây là nền tảng của toàn bộ mô hình kinh doanh.</div>
+    </div>
+    <div class="adv-card">
+      <div class="adv-icon">🏭</div>
+      <div class="adv-title">Mạng lưới xưởng vệ tinh</div>
+      <div class="adv-desc">Nhiều xưởng với năng lực khác nhau = "nhà máy ảo" linh hoạt. Không cần đầu tư cơ sở hạ tầng lớn, tự điều phối theo nhu cầu thực tế.</div>
+    </div>
+    <div class="adv-card">
+      <div class="adv-icon">🤖</div>
+      <div class="adv-title">Vận hành dẫn đầu bởi AI</div>
+      <div class="adv-desc">Tự động hóa điều phối, định giá, QC, phân công — giảm phụ thuộc con người, tăng tốc độ, giảm lỗi. Đối thủ nhỏ không đủ lực xây, đối thủ lớn quá cồng kềnh.</div>
+    </div>
+  </div>
+</div>
+
+<!-- 2. 7 TRỤ CỘT -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">02</div>
+    <div class="section-title">7 Trụ cột Chiến lược</div>
+  </div>
+  <div class="pillars">
+    <div class="pillar">
+      <div class="pillar-num">1</div>
+      <div class="pillar-title">Hệ thống Nhà cung ứng & Xưởng vệ tinh</div>
+      <div class="pillar-desc">Quản lý, phân công, thanh toán qua app. Mỗi xưởng thấy đúng việc phù hợp năng lực của mình.</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">2</div>
+      <div class="pillar-title">Kênh khai thác đầu ra Online</div>
+      <div class="pillar-desc">Facebook, Zalo, TikTok, Shopee. Người béo/gầy mua online nhiều vì ngại thử đồ tại shop — đây là kênh tự nhiên nhất.</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">3</div>
+      <div class="pillar-title">Thương hiệu & Cam kết</div>
+      <div class="pillar-desc">"May lại miễn phí nếu không đúng số đo" — cam kết mà shop thông thường không làm được. Xây lòng tin nhanh nhất.</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">4</div>
+      <div class="pillar-title">Chuẩn hóa Kỹ thuật</div>
+      <div class="pillar-desc">Bộ rập chuẩn theo dáng người. Quy trình đo từ xa. Phiếu kỹ thuật thống nhất. Xương sống kết nối toàn hệ thống.</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">5</div>
+      <div class="pillar-title">Thiết kế & Kỹ thuật số hóa</div>
+      <div class="pillar-desc">Thư viện rập số + mạng lưới designer/kỹ thuật viên freelance trong platform. AI grade rập tự động theo số đo từng khách.</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">6</div>
+      <div class="pillar-title">QC Phân tán</div>
+      <div class="pillar-desc">Tiêu chuẩn chất lượng thống nhất. AI phát hiện lỗi sơ bộ trên ảnh. Xưởng lỗi → tự chịu chi phí làm lại.</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">7</div>
+      <div class="pillar-title">CRM & Dữ liệu Khách hàng</div>
+      <div class="pillar-desc">Lưu số đo vĩnh viễn. Ghi nhận sở thích. Chăm sóc định kỳ. Tỷ lệ mua lại cao = kênh marketing rẻ nhất.</div>
+    </div>
+  </div>
+</div>
+
+<!-- 3. LUỒNG ĐƠN HÀNG -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">03</div>
+    <div class="section-title">Luồng Vận hành 1 Đơn hàng</div>
+  </div>
+  <div class="flow">
+    <div class="flow-step">
+      <div class="flow-num">1</div>
+      <div>
+        <div class="flow-content-title">Khách đặt hàng & nhập số đo <span class="flow-tag tag-ai">AI hỗ trợ</span></div>
+        <div class="flow-content-desc">Chọn sản phẩm, chất liệu, màu. AI hướng dẫn đo từng bước, validate logic số đo ngay lập tức (phát hiện số đo bất hợp lý). Thu cọc 50–70% online.</div>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-num">2</div>
+      <div>
+        <div class="flow-content-title">Xử lý thiết kế & kỹ thuật <span class="flow-tag tag-ai">AI grade</span></div>
+        <div class="flow-content-desc">Mẫu có sẵn trong thư viện → AI tự động grade rập theo số đo → tạo phiếu kỹ thuật. Mẫu mới → gửi brief cho designer freelance trong platform.</div>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-num">3</div>
+      <div>
+        <div class="flow-content-title">AI phân công xưởng <span class="flow-tag tag-ai">AI tự động</span></div>
+        <div class="flow-content-desc">Đề xuất xưởng phù hợp theo: loại hàng + tải hiện tại + lịch sử chất lượng + năng lực khai báo. Xưởng nhận hoặc từ chối qua app.</div>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-num">4</div>
+      <div>
+        <div class="flow-content-title">Xưởng sản xuất & báo tiến độ <span class="flow-tag tag-human">Xưởng</span></div>
+        <div class="flow-content-desc">Nhận phiếu kỹ thuật chi tiết. Cập nhật % hoàn thành. Gửi ảnh công đoạn. Cảnh báo tự động nếu có nguy cơ trễ hạn.</div>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-num">5</div>
+      <div>
+        <div class="flow-content-title">Kiểm soát chất lượng QC <span class="flow-tag tag-ai">AI + người</span></div>
+        <div class="flow-content-desc">Xưởng upload ảnh hoàn thiện. AI phát hiện lỗi sơ bộ → QC xác nhận. Đạt → trigger đóng gói. Không đạt → gửi yêu cầu làm lại kèm ghi chú lỗi.</div>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-num">6</div>
+      <div>
+        <div class="flow-content-title">Giao hàng & thanh toán <span class="flow-tag tag-auto">Tự động</span></div>
+        <div class="flow-content-desc">QC duyệt → trigger thanh toán cho xưởng (T+3). Giao vận. Khách nhận hàng → đánh giá. Số đo + lịch sử lưu vĩnh viễn vào CRM.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 4. VAI TRÒ TRONG APP -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">04</div>
+    <div class="section-title">7 Vai trò trong Platform App</div>
+  </div>
+  <div class="roles-grid">
+    <div class="role-card color-customer">
+      <div class="role-header">
+        <div class="role-icon">🛍️</div>
+        <div>
+          <div class="role-name">Khách hàng</div>
+          <div class="role-sub">Customer — người mua cuối</div>
+        </div>
+      </div>
+      <ul class="role-features">
+        <li>Đặt hàng, chọn mẫu, nhập số đo có hướng dẫn</li>
+        <li>Theo dõi tiến độ đơn hàng theo thời gian thực</li>
+        <li>Lịch sử số đo lưu vĩnh viễn</li>
+        <li>Thanh toán cọc & thanh toán cuối online</li>
+        <li>Đánh giá, phản hồi sau nhận hàng</li>
+      </ul>
+    </div>
+    <div class="role-card color-workshop">
+      <div class="role-header">
+        <div class="role-icon">🏭</div>
+        <div>
+          <div class="role-name">Xưởng vệ tinh</div>
+          <div class="role-sub">Workshop — đối tác gia công</div>
+        </div>
+      </div>
+      <ul class="role-features">
+        <li>Thấy danh sách đơn phù hợp năng lực, chủ động nhận</li>
+        <li>Phiếu kỹ thuật đầy đủ: số đo, bản vẽ, yêu cầu</li>
+        <li>Khai báo năng lực, loại hàng, thời gian rảnh</li>
+        <li>Upload ảnh QC, báo tiến độ</li>
+        <li>Theo dõi lịch sử & trạng thái thanh toán</li>
+      </ul>
+    </div>
+    <div class="role-card color-design">
+      <div class="role-header">
+        <div class="role-icon">✏️</div>
+        <div>
+          <div class="role-name">Designer & Kỹ thuật viên</div>
+          <div class="role-sub">Freelance — "xưởng trí tuệ"</div>
+        </div>
+      </div>
+      <ul class="role-features">
+        <li>Nhận brief thiết kế từ đơn hàng mới</li>
+        <li>Đóng góp mẫu vào thư viện, nhận phí bản quyền</li>
+        <li>Làm rập kỹ thuật, AI grade sơ bộ rồi review</li>
+        <li>Được xếp hạng theo chất lượng, nhận việc ưu tiên</li>
+      </ul>
+    </div>
+    <div class="role-card color-supplier">
+      <div class="role-header">
+        <div class="role-icon">🧵</div>
+        <div>
+          <div class="role-name">Nhà cung ứng</div>
+          <div class="role-sub">Supplier — vải & nguyên liệu</div>
+        </div>
+      </div>
+      <ul class="role-features">
+        <li>Catalog vải, màu, đơn giá, tồn kho thực</li>
+        <li>Nhận yêu cầu báo giá tự động khi phát sinh đơn</li>
+        <li>Xác nhận đơn vật tư, cam kết thời gian giao</li>
+        <li>Lịch sử giao dịch, công nợ minh bạch</li>
+      </ul>
+    </div>
+    <div class="role-card color-qc">
+      <div class="role-header">
+        <div class="role-icon">🔍</div>
+        <div>
+          <div class="role-name">QC Kiểm soát chất lượng</div>
+          <div class="role-sub">Quality Control</div>
+        </div>
+      </div>
+      <ul class="role-features">
+        <li>Hàng đợi duyệt ảnh từ xưởng</li>
+        <li>AI phát hiện lỗi sơ bộ — QC chỉ xác nhận</li>
+        <li>Checklist số hóa theo tiêu chuẩn</li>
+        <li>Thống kê xưởng lỗi nhiều → cảnh báo, hạ hạng</li>
+      </ul>
+    </div>
+    <div class="role-card color-admin">
+      <div class="role-header">
+        <div class="role-icon">⚙️</div>
+        <div>
+          <div class="role-name">Trung tâm điều phối / Admin</div>
+          <div class="role-sub">AI Engine + Quản trị</div>
+        </div>
+      </div>
+      <ul class="role-features">
+        <li>Dashboard tổng: tất cả đơn, xưởng, trạng thái</li>
+        <li>AI phân xưởng, định giá, dự báo nhu cầu</li>
+        <li>Cảnh báo đơn có nguy cơ trễ hạn</li>
+        <li>Báo cáo tài chính, lãi gộp từng đơn/kênh</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- 5. AI ENGINE -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">05</div>
+    <div class="section-title">AI Engine — Làm gì, Mức độ nào</div>
+  </div>
+  <div class="ai-grid">
+    <div class="ai-item">
+      <div>
+        <div class="ai-item-title">Validate số đo từ xa</div>
+        <div class="ai-item-desc">Phát hiện số đo bất hợp lý, cảnh báo trước khi vào sản xuất</div>
+      </div>
+      <div class="ai-level"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div></div>
+    </div>
+    <div class="ai-item">
+      <div>
+        <div class="ai-item-title">Auto-grade rập theo số đo</div>
+        <div class="ai-item-desc">Từ rập gốc tự động ra rập cho từng khách hàng</div>
+      </div>
+      <div class="ai-level"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div></div>
+    </div>
+    <div class="ai-item">
+      <div>
+        <div class="ai-item-title">Phân xưởng tự động</div>
+        <div class="ai-item-desc">Đề xuất xưởng theo loại hàng + tải + lịch sử chất lượng</div>
+      </div>
+      <div class="ai-level"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div></div>
+    </div>
+    <div class="ai-item">
+      <div>
+        <div class="ai-item-title">Ước tính tiêu hao vải</div>
+        <div class="ai-item-desc">Tự động tính vật tư theo size + kiểu dáng → định giá chính xác</div>
+      </div>
+      <div class="ai-level"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div></div>
+    </div>
+    <div class="ai-item">
+      <div>
+        <div class="ai-item-title">Gợi ý kiểu dáng theo dáng người</div>
+        <div class="ai-item-desc">Phân tích số đo → gợi ý kiểu phù hợp, cảnh báo kiểu không phù hợp</div>
+      </div>
+      <div class="ai-level"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div></div>
+    </div>
+    <div class="ai-item">
+      <div>
+        <div class="ai-item-title">Phát hiện lỗi QC trên ảnh</div>
+        <div class="ai-item-desc">Scan ảnh sản phẩm, flag lỗi sơ bộ trước khi QC người xem xét</div>
+      </div>
+      <div class="ai-level"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div><div class="dot"></div></div>
+    </div>
+    <div class="ai-item">
+      <div>
+        <div class="ai-item-title">Cảnh báo trễ hạn</div>
+        <div class="ai-item-desc">Phân tích tiến độ → cảnh báo trước khi trễ, gợi ý điều phối lại</div>
+      </div>
+      <div class="ai-level"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div></div>
+    </div>
+    <div class="ai-item">
+      <div>
+        <div class="ai-item-title">Dự báo nhu cầu theo mùa</div>
+        <div class="ai-item-desc">Học từ dữ liệu bán hàng → dự báo tải xưởng, chủ động điều phối</div>
+      </div>
+      <div class="ai-level"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div><div class="dot"></div></div>
+    </div>
+  </div>
+  <p style="font-size:12px; color:var(--muted); margin-top:16px; text-align:right;">● Mức độ hiệu quả AI (5 chấm = cao nhất)</p>
+</div>
+
+<!-- 6. 3 LỚP KỸ THUẬT -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">06</div>
+    <div class="section-title">3 Lớp Thiết kế & Kỹ thuật</div>
+  </div>
+  <div class="tech-layer">
+    <div class="tech-layer-header">
+      <div class="tech-layer-title">Lớp 1 — Thư viện Kỹ thuật số (Tài sản cốt lõi)</div>
+      <span class="tech-badge badge-core">Core Asset</span>
+    </div>
+    <div class="tech-layer-body">
+      Bộ rập chuẩn số hóa theo dáng người (béo đều · béo bụng · béo hông · gầy vai hẹp · gầy hông nở...). Mỗi dáng = 1 bộ rập gốc, xây 1 lần bởi kỹ thuật viên giỏi, dùng mãi mãi. Phần mềm: Gerber, Accumark hoặc Valentina (mã nguồn mở). Số đo khách chỉ là biến điều chỉnh, AI tự grade ra rập cụ thể.
+    </div>
+  </div>
+  <div class="tech-layer">
+    <div class="tech-layer-header">
+      <div class="tech-layer-title">Lớp 2 — Mạng lưới Freelance Thiết kế & Kỹ thuật</div>
+      <span class="tech-badge badge-network">Network</span>
+    </div>
+    <div class="tech-layer-body">
+      Designer và kỹ thuật viên tham gia platform như một vai trò — nhận việc, giao việc qua app. Designer đóng góp mẫu vào thư viện, nhận phí bản quyền mỗi lần mẫu được chọn. Kỹ thuật viên được xếp hạng theo tỉ lệ đơn không phải sửa lại — hạng cao nhận việc ưu tiên. Không cần thuê in-house, không bị lộ bí quyết.
+    </div>
+  </div>
+  <div class="tech-layer">
+    <div class="tech-layer-header">
+      <div class="tech-layer-title">Lớp 3 — AI Grading & Tự động hóa</div>
+      <span class="tech-badge badge-ai">AI Powered</span>
+    </div>
+    <div class="tech-layer-body">
+      AI auto-grade rập từ size gốc theo số đo từng khách → giảm 80% công việc kỹ thuật thủ công. Ước tính tiêu hao vải tự động → định giá chính xác. Phát hiện xung đột giữa số đo và kiểu dáng. Mục tiêu dài hạn: 70–80% đơn đi qua luồng mẫu có sẵn, AI xử lý hoàn toàn, không cần người.
+    </div>
+  </div>
+</div>
+
+<!-- 7. LỘ TRÌNH -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">07</div>
+    <div class="section-title">Lộ trình Triển khai 3 Giai đoạn</div>
+  </div>
+  <div class="roadmap">
+    <div class="phase">
+      <div class="phase-label">Giai đoạn 1</div>
+      <div class="phase-title">Chứng minh Mô hình</div>
+      <div class="phase-period">Tháng 1 – 4 · MVP</div>
+      <ul class="phase-tasks">
+        <li>Chọn 1 sản phẩm + 1 phân khúc (nam ngoại cỡ)</li>
+        <li>Thuê kỹ thuật viên giỏi xây bộ rập gốc 3 sản phẩm</li>
+        <li>Xây app MVP bằng no-code (Glide/Bubble): Khách + Xưởng + Admin</li>
+        <li>Chạy thử 10–20 đơn thật, đo toàn bộ quy trình</li>
+        <li>Thu thập ảnh thật, review thật làm tư liệu marketing</li>
+        <li>Quy trình đo từ xa + video hướng dẫn chuẩn</li>
+      </ul>
+      <div class="phase-kpi">KPI: 20 đơn thành công · Dòng tiền dương</div>
+    </div>
+    <div class="phase">
+      <div class="phase-label">Giai đoạn 2</div>
+      <div class="phase-title">Scale & Tự động hóa</div>
+      <div class="phase-period">Tháng 5 – 9 · Growth</div>
+      <ul class="phase-tasks">
+        <li>Mở kênh online: TikTok, Facebook, Zalo, Shopee</li>
+        <li>Thêm vai trò: QC, Nhà cung ứng, Kế toán, Designer</li>
+        <li>Tích hợp AI phân xưởng, validate số đo tự động</li>
+        <li>Tích hợp thanh toán MoMo/VNPay tự động</li>
+        <li>Mở rộng thư viện mẫu, mời designer freelance</li>
+        <li>Xây CRM, lưu số đo, chăm sóc mua lại</li>
+      </ul>
+      <div class="phase-kpi">KPI: 200+ đơn/tháng · 3+ xưởng vệ tinh</div>
+    </div>
+    <div class="phase">
+      <div class="phase-label">Giai đoạn 3</div>
+      <div class="phase-title">AI-first Platform</div>
+      <div class="phase-period">Tháng 10+ · Scale</div>
+      <ul class="phase-tasks">
+        <li>AI QC phát hiện lỗi trên ảnh tự động</li>
+        <li>AI auto-grade rập hoàn chỉnh không cần kỹ thuật viên</li>
+        <li>Dự báo nhu cầu mùa vụ, điều phối xưởng chủ động</li>
+        <li>Mở rộng phân khúc: nữ, đồng phục, trẻ em</li>
+        <li>Cân nhắc nhượng quyền mô hình hoặc B2B</li>
+      </ul>
+      <div class="phase-kpi">KPI: 80% đơn tự động · Thương hiệu top phân khúc</div>
+    </div>
+  </div>
+</div>
+
+<!-- 8. RỦI RO -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">08</div>
+    <div class="section-title">Rủi ro & Cách xử lý</div>
+  </div>
+  <table class="risk-table">
+    <tr>
+      <th>Rủi ro</th>
+      <th>Mức độ</th>
+      <th>Giải pháp</th>
+    </tr>
+    <tr>
+      <td>Xưởng không chịu dùng app, quen làm Zalo/điện thoại</td>
+      <td><span class="risk-level risk-high">Cao</span></td>
+      <td>Thiết kế app cực đơn giản cho xưởng — chỉ 3 thao tác: Nhận việc · Cập nhật tiến độ · Gửi ảnh QC</td>
+    </tr>
+    <tr>
+      <td>Khách nhập số đo sai, gây hỏng cả đơn hàng</td>
+      <td><span class="risk-level risk-high">Cao</span></td>
+      <td>Video hướng dẫn đo từng bước + AI validate logic số đo trước khi xác nhận + xác nhận lại lần 2</td>
+    </tr>
+    <tr>
+      <td>Thanh toán chậm làm xưởng mất tin tưởng, rời nền tảng</td>
+      <td><span class="risk-level risk-high">Cao</span></td>
+      <td>Cam kết thanh toán T+3 sau QC duyệt — đây là điều kiện sống còn để giữ chân xưởng</td>
+    </tr>
+    <tr>
+      <td>Chất lượng không đồng đều giữa các xưởng</td>
+      <td><span class="risk-level risk-mid">Trung bình</span></td>
+      <td>Tiêu chuẩn QC rõ ràng · Lỗi do xưởng → xưởng chịu làm lại · Xếp hạng xưởng theo lịch sử</td>
+    </tr>
+    <tr>
+      <td>Phụ thuộc 1–2 xưởng chủ lực, nếu họ rời → tắc đơn</td>
+      <td><span class="risk-level risk-mid">Trung bình</span></td>
+      <td>Luôn duy trì tối thiểu 3 xưởng/mỗi loại hàng. Không để 1 xưởng chiếm >40% tổng đơn</td>
+    </tr>
+    <tr>
+      <td>Thiếu vốn để xây app khi đơn hàng chưa ổn định</td>
+      <td><span class="risk-level risk-mid">Trung bình</span></td>
+      <td>Giai đoạn 1 dùng no-code (Glide, Softr) chi phí rất thấp. Chỉ đầu tư app native khi đã có doanh thu</td>
+    </tr>
+  </table>
+</div>
+
+<!-- INSIGHT -->
+<div class="key-insight">
+  <p>"Bạn không xây một xưởng may — bạn xây một hệ điều hành cho ngành may mặc theo yêu cầu. Tài sản thực sự là dữ liệu số đo, bộ rập chuẩn và mạng lưới xưởng — không phải máy móc."</p>
+</div>
+
+<!-- VISION -->
+<div class="vision">
+  <h2>Tầm nhìn:<br><span>Nhà máy May ảo</span><br>dẫn đầu bởi AI</h2>
+  <p>Mọi người Việt Nam — dù béo hay gầy, cao hay thấp — đều có thể mặc đồ vừa vặn, đẹp, với chi phí hợp lý. Không cần ra tiệm. Không cần chờ đợi. Chỉ cần điện thoại.</p>
+  <div class="vision-metrics">
+    <div>
+      <div class="v-metric-num">80%</div>
+      <div class="v-metric-label">Tự động hóa mục tiêu</div>
+    </div>
+    <div>
+      <div class="v-metric-num">T+3</div>
+      <div class="v-metric-label">Thanh toán xưởng</div>
+    </div>
+    <div>
+      <div class="v-metric-num">∞</div>
+      <div class="v-metric-label">Size có thể phục vụ</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
