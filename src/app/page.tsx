@@ -12,9 +12,18 @@ import Newsletter from '@/components/sections/Newsletter'
 import Footer from '@/components/layout/Footer'
 import PromoBar from '@/components/layout/PromoBar'
 
-import { PRODUCTS, FEATURED_PRODUCT, CATEGORIES, REVIEWS } from '@/lib/data'
+import { getProducts, getFeaturedProduct, getCategories, getReviews } from '@/lib/queries'
 
-export default function HomePage() {
+export const revalidate = 60 // ISR: revalidate every 60s
+
+export default async function HomePage() {
+  const [products, featured, categories, reviews] = await Promise.all([
+    getProducts(),
+    getFeaturedProduct(),
+    getCategories(),
+    getReviews(),
+  ])
+
   return (
     <>
       <CustomCursor />
@@ -25,11 +34,11 @@ export default function HomePage() {
       <main>
         <Hero />
         <Marquee items={['Bộ sưu tập Xuân Hè 2025','Thiết kế độc quyền','Chất liệu cao cấp','Giao hàng toàn quốc','Đổi trả miễn phí 30 ngày']} />
-        <ProductsGrid products={PRODUCTS} />
-        <FeaturedProduct product={FEATURED_PRODUCT} />
-        <Categories categories={CATEGORIES} />
+        <ProductsGrid products={products} />
+        <FeaturedProduct product={featured} />
+        <Categories categories={categories} />
         <BrandStory />
-        <Testimonials reviews={REVIEWS} />
+        <Testimonials reviews={reviews} />
         <Newsletter />
       </main>
 

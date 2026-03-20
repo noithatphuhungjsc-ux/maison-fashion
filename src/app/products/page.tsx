@@ -4,20 +4,22 @@ import CartDrawer from '@/components/layout/CartDrawer'
 import CustomCursor from '@/components/layout/CustomCursor'
 import Footer from '@/components/layout/Footer'
 import ProductCard from '@/components/shop/ProductCard'
-import { PRODUCTS } from '@/lib/data'
+import { getProducts } from '@/lib/queries'
 import { CATEGORY_LABELS } from '@/types'
 import type { ProductCategory } from '@/types'
 
 export const metadata: Metadata = { title: 'Tất cả sản phẩm' }
+export const revalidate = 60
 
-export default function ProductsPage({
+export default async function ProductsPage({
   searchParams,
 }: {
   searchParams: { category?: string; filter?: string; sort?: string }
 }) {
   const { category, filter, sort } = searchParams
 
-  let products = [...PRODUCTS]
+  const allProducts = await getProducts()
+  let products = [...allProducts]
 
   if (category) products = products.filter(p => p.category === category)
   if (filter === 'new') products = products.filter(p => p.badge === 'new')
@@ -29,7 +31,7 @@ export default function ProductsPage({
 
   const categories = Object.entries(CATEGORY_LABELS) as [ProductCategory, string][]
   const counts = Object.fromEntries(
-    categories.map(([cat]) => [cat, PRODUCTS.filter(p => p.category === cat).length])
+    categories.map(([cat]) => [cat, allProducts.filter(p => p.category === cat).length])
   )
 
   return (
@@ -57,7 +59,7 @@ export default function ProductsPage({
               <ul className="space-y-2.5">
                 <li>
                   <a href="/products" className={`text-[13px] transition-colors ${!category ? 'text-[#c8a96e]' : 'text-muted hover:text-[#f0ede6]'}`}>
-                    Tất cả ({PRODUCTS.length})
+                    Tất cả ({allProducts.length})
                   </a>
                 </li>
                 {categories.map(([slug, label]) => (

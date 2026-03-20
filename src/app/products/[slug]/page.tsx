@@ -1,16 +1,17 @@
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
-import { PRODUCTS, FEATURED_PRODUCT } from '@/lib/data'
+import { getProductBySlug, getProducts, getAllSlugs } from '@/lib/queries'
 import ProductDetailClient from './ProductDetailClient'
 
-const ALL_PRODUCTS = [FEATURED_PRODUCT, ...PRODUCTS]
+export const revalidate = 60
 
-export function generateStaticParams() {
-  return ALL_PRODUCTS.map(p => ({ slug: p.slug }))
+export async function generateStaticParams() {
+  const slugs = await getAllSlugs()
+  return slugs.map(slug => ({ slug }))
 }
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  const product = ALL_PRODUCTS.find(p => p.slug === params.slug)
+  const product = await getProductBySlug(params.slug)
   if (!product) return {}
   return {
     title: product.name,
@@ -18,11 +19,12 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   }
 }
 
-export default function ProductPage({ params }: { params: { slug: string } }) {
-  const product = ALL_PRODUCTS.find(p => p.slug === params.slug)
+export default async function ProductPage({ params }: { params: { slug: string } }) {
+  const product = await getProductBySlug(params.slug)
   if (!product) notFound()
 
-  const related = PRODUCTS.filter(p => p.category === product.category && p.id !== product.id).slice(0, 4)
+  const allProducts = await getProducts()
+  const related = allProducts.filter(p => p.category === product.category && p.slug !== product.slug).slice(0, 4)
 
   return <ProductDetailClient product={product} related={related} />
 }
