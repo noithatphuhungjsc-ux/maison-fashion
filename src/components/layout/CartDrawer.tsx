@@ -36,7 +36,7 @@ export default function CartDrawer() {
 
       {/* Drawer */}
       <aside className={cn(
-        'fixed top-0 right-0 w-[440px] h-screen bg-[#131210] border-l border-white/7 z-[200] flex flex-col transition-transform duration-[400ms]',
+        'fixed top-0 right-0 w-full sm:w-[400px] md:w-[440px] h-screen bg-[#131210] border-l border-white/7 z-[200] flex flex-col transition-transform duration-[400ms]',
         'cubic-bezier(0.25,0.46,0.45,0.94)',
         open ? 'translate-x-0' : 'translate-x-full'
       )}>

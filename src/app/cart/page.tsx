@@ -15,9 +15,9 @@ export default function CartPage() {
     return (
       <>
         <CustomCursor /><CartDrawer /><Navbar />
-        <main className="pt-[72px] min-h-screen flex flex-col items-center justify-center gap-6">
+        <main className="pt-[60px] md:pt-[72px] min-h-screen flex flex-col items-center justify-center gap-6 px-5">
           <span className="text-8xl opacity-20">🛍</span>
-          <h1 className="font-serif text-4xl font-light">Giỏ hàng trống</h1>
+          <h1 className="font-serif text-3xl md:text-4xl font-light">Giỏ hàng trống</h1>
           <p className="text-muted text-[15px]">Hãy khám phá bộ sưu tập của chúng tôi</p>
           <Link href="/#products"
             className="bg-[#c8a96e] hover:bg-[#e8d0a0] text-[#0b0a08] text-[11px] tracking-[0.18em] uppercase font-medium px-10 py-4 transition-colors">
@@ -36,18 +36,18 @@ export default function CartPage() {
   return (
     <>
       <CustomCursor /><CartDrawer /><Navbar />
-      <main className="pt-[72px] px-12 py-16">
+      <main className="pt-[60px] md:pt-[72px] px-5 md:px-12 py-10 md:py-16">
         {/* Header */}
-        <div className="mb-12">
+        <div className="mb-8 md:mb-12">
           <p className="text-[10px] tracking-[0.3em] uppercase text-[#c8a96e] mb-3">Giỏ hàng của bạn</p>
-          <h1 className="font-serif text-[48px] font-light">{count()} sản phẩm</h1>
+          <h1 className="font-serif text-[36px] md:text-[48px] font-light">{count()} sản phẩm</h1>
         </div>
 
-        <div className="grid grid-cols-[1fr_380px] gap-12 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-8 md:gap-12 items-start">
           {/* Items */}
           <div className="space-y-px bg-white/7">
-            {/* Table head */}
-            <div className="grid grid-cols-[1fr_100px_140px_100px_40px] gap-4 items-center bg-[#131210] px-6 py-3 text-[10px] tracking-[0.2em] uppercase text-muted/60">
+            {/* Table head — hidden on mobile */}
+            <div className="hidden md:grid grid-cols-[1fr_100px_140px_100px_40px] gap-4 items-center bg-[#131210] px-6 py-3 text-[10px] tracking-[0.2em] uppercase text-muted/60">
               <span>Sản phẩm</span>
               <span className="text-center">Đơn giá</span>
               <span className="text-center">Số lượng</span>
@@ -56,43 +56,39 @@ export default function CartPage() {
             </div>
 
             {items.map(item => (
-              <div key={`${item.productId}-${item.size}`}
-                className="grid grid-cols-[1fr_100px_140px_100px_40px] gap-4 items-center bg-[#0b0a08] px-6 py-5">
-                {/* Product */}
-                <div className="flex items-center gap-4">
+              <div key={`${item.productId}-${item.size}`} className="bg-[#0b0a08] px-4 md:px-6 py-5">
+                {/* Mobile layout */}
+                <div className="flex gap-4">
                   <div className="w-16 h-20 bg-[#131210] flex items-center justify-center text-3xl flex-shrink-0">
                     {item.emoji}
                   </div>
-                  <div>
-                    <p className="font-serif text-[17px] font-light leading-tight">{item.name}</p>
+                  <div className="flex-1 min-w-0">
+                    <p className="font-serif text-[16px] md:text-[17px] font-light leading-tight">{item.name}</p>
                     <p className="text-[11px] text-muted/60 tracking-[0.1em] mt-1">Size: {item.size}</p>
+                    <div className="flex items-center justify-between mt-3 gap-3 flex-wrap">
+                      <div className="flex items-center border border-white/13 w-fit">
+                        <button onClick={() => changeQty(item.productId, item.size as Size, -1)}
+                          className="w-9 h-9 text-muted hover:text-[#c8a96e] transition-colors text-lg flex items-center justify-center">−</button>
+                        <span className="w-8 text-center font-mono text-[13px]">{item.qty}</span>
+                        <button onClick={() => changeQty(item.productId, item.size as Size, 1)}
+                          className="w-9 h-9 text-muted hover:text-[#c8a96e] transition-colors text-lg flex items-center justify-center">+</button>
+                      </div>
+                      <p className="font-mono text-[14px] font-medium text-[#c8a96e]">
+                        {formatPrice(item.price * item.qty)}
+                      </p>
+                      <button onClick={() => remove(item.productId, item.size as Size)}
+                        className="text-muted/40 hover:text-red-400 transition-colors text-sm">
+                        Xóa
+                      </button>
+                    </div>
                   </div>
                 </div>
-                {/* Unit price */}
-                <p className="text-center text-[13px] font-mono text-muted">{formatPrice(item.price)}</p>
-                {/* Qty */}
-                <div className="flex items-center justify-center border border-white/13 w-fit mx-auto">
-                  <button onClick={() => changeQty(item.productId, item.size as Size, -1)}
-                    className="w-9 h-9 text-muted hover:text-[#c8a96e] transition-colors text-lg flex items-center justify-center">−</button>
-                  <span className="w-8 text-center font-mono text-[13px]">{item.qty}</span>
-                  <button onClick={() => changeQty(item.productId, item.size as Size, 1)}
-                    className="w-9 h-9 text-muted hover:text-[#c8a96e] transition-colors text-lg flex items-center justify-center">+</button>
-                </div>
-                {/* Subtotal */}
-                <p className="text-right font-mono text-[14px] font-medium text-[#c8a96e]">
-                  {formatPrice(item.price * item.qty)}
-                </p>
-                {/* Remove */}
-                <button onClick={() => remove(item.productId, item.size as Size)}
-                  className="text-muted/40 hover:text-red-400 transition-colors text-lg flex items-center justify-center">
-                  ×
-                </button>
               </div>
             ))}
           </div>
 
           {/* Summary */}
-          <div className="bg-[#131210] border border-white/7 p-8 sticky top-24">
+          <div className="bg-[#131210] border border-white/7 p-6 md:p-8 sticky top-24">
             <h2 className="font-serif text-2xl font-light mb-7">Tóm tắt đơn hàng</h2>
             <div className="space-y-3 pb-6 border-b border-white/7">
               <div className="flex justify-between text-[13px]">
@@ -113,14 +109,14 @@ export default function CartPage() {
             </div>
             <div className="flex justify-between items-baseline py-5">
               <span className="text-[13px] tracking-[0.1em] uppercase text-muted">Tổng cộng</span>
-              <span className="font-serif text-3xl text-[#c8a96e]">{formatPrice(grandTotal)}</span>
+              <span className="font-serif text-2xl md:text-3xl text-[#c8a96e]">{formatPrice(grandTotal)}</span>
             </div>
 
             {/* Promo code */}
             <div className="flex gap-0 mb-6 border border-white/13">
               <input type="text" placeholder="Mã ưu đãi"
                 className="flex-1 bg-transparent px-4 py-3 text-[12px] outline-none placeholder:text-muted/50" />
-              <button className="px-5 text-[11px] tracking-[0.12em] uppercase text-[#c8a96e] hover:text-[#e8d0a0] transition-colors border-l border-white/13">
+              <button className="px-4 md:px-5 text-[11px] tracking-[0.12em] uppercase text-[#c8a96e] hover:text-[#e8d0a0] transition-colors border-l border-white/13">
                 Áp dụng
               </button>
             </div>

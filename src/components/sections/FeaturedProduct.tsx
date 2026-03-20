@@ -21,33 +21,33 @@ export default function FeaturedProduct({ product }: Props) {
   }
 
   return (
-    <section id="featured" className="px-12 pb-24">
+    <section id="featured" className="px-5 md:px-12 pb-16 md:pb-24">
       {/* Section header */}
-      <div className="flex items-end justify-between mb-14">
+      <div className="flex items-end justify-between mb-10 md:mb-14">
         <div>
           <p className="text-[10px] tracking-[0.3em] uppercase text-[#c8a96e] mb-3">Sản phẩm của tuần</p>
-          <h2 className="font-serif text-[clamp(36px,4vw,56px)] font-light leading-[1.1]">
+          <h2 className="font-serif text-[32px] md:text-[clamp(36px,4vw,56px)] font-light leading-[1.1]">
             Đầm dạ hội<br /><em className="not-italic text-[#e8d0a0]">Noir Silk</em>
           </h2>
         </div>
       </div>
 
-      {/* 2-col layout */}
-      <div className="grid grid-cols-2 gap-px bg-white/7">
+      {/* 2-col layout — stacks on mobile */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-white/7">
         {/* Media */}
         <div className="bg-[#131210] aspect-square flex items-center justify-center relative overflow-hidden">
-          <span className="text-[140px] opacity-60 select-none">{product.emoji}</span>
+          <span className="text-[100px] md:text-[140px] opacity-60 select-none">{product.emoji}</span>
           <div className="absolute bottom-6 left-6 text-[11px] tracking-[0.2em] uppercase text-white/35">
             Silk · 100% cao cấp
           </div>
         </div>
 
         {/* Content */}
-        <div className="bg-[#0b0a08] px-20 py-20 flex flex-col justify-center">
+        <div className="bg-[#0b0a08] px-5 py-10 md:px-20 md:py-20 flex flex-col justify-center">
           <p className="text-[10px] tracking-[0.3em] uppercase text-[#c8a96e] mb-4">{product.tag}</p>
-          <h3 className="font-serif text-[36px] font-light leading-[1.2] mb-4">
+          <h3 className="font-serif text-[28px] md:text-[36px] font-light leading-[1.2] mb-4">
             {product.name}<br />
-            <em className="not-italic text-muted text-[28px]">tay bồng</em>
+            <em className="not-italic text-muted text-[22px] md:text-[28px]">tay bồng</em>
           </h3>
 
           <p className="text-[14px] text-muted leading-[1.9] mb-7 max-w-[480px]">
@@ -67,11 +67,11 @@ export default function FeaturedProduct({ product }: Props) {
 
           {/* Price */}
           <div className="flex items-baseline gap-4 mb-6">
-            <span className="font-serif text-5xl font-light text-[#c8a96e]">
+            <span className="font-serif text-4xl md:text-5xl font-light text-[#c8a96e]">
               {formatPrice(product.price)}
             </span>
             {product.originalPrice && (
-              <span className="text-[20px] text-muted/60 line-through">
+              <span className="text-[18px] md:text-[20px] text-muted/60 line-through">
                 {formatPrice(product.originalPrice)}
               </span>
             )}

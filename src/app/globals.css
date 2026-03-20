@@ -18,7 +18,11 @@ body {
   color: #f0ede6;
   font-family: 'DM Sans', sans-serif;
   overflow-x: hidden;
-  cursor: none;
+}
+
+/* Custom cursor only on desktop with pointer device */
+@media (pointer: fine) {
+  body { cursor: none; }
 }
 
 body::before {

@@ -1,5 +1,6 @@
 'use client'
 import { useState } from 'react'
+import Link from 'next/link'
 import { toast } from 'sonner'
 import { useCart, useWishlist } from '@/store/cart'
 import { formatPrice, cn } from '@/lib/utils'
@@ -84,9 +85,9 @@ export default function ProductCard({ product }: { product: Product }) {
       </div>
 
       {/* Body */}
-      <div className="px-6 py-5">
+      <Link href={`/products/${product.slug}`} className="block px-4 md:px-6 py-4 md:py-5">
         <p className="text-[10px] tracking-[0.2em] uppercase text-[#c8a96e] mb-1.5">{product.tag}</p>
-        <h3 className="font-serif text-[20px] font-light leading-tight">{product.name}</h3>
+        <h3 className="font-serif text-[17px] md:text-[20px] font-light leading-tight">{product.name}</h3>
         <div className="flex items-center justify-between mt-2.5">
           <div className="text-[14px] font-medium">
             {product.originalPrice && (
@@ -96,12 +97,12 @@ export default function ProductCard({ product }: { product: Product }) {
             )}
             {formatPrice(product.price)}
           </div>
-          <div className="flex items-center gap-1 text-[11px] text-muted/60">
+          <div className="flex items-center gap-1 text-[10px] md:text-[11px] text-muted/60">
             <span className="text-[#c8a96e] text-[12px]">★</span>
             {product.rating} ({product.reviewCount})
           </div>
         </div>
-      </div>
+      </Link>
     </div>
   )
 }
