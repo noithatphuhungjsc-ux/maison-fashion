@@ -184,6 +184,31 @@ export default function AdminLoginPage() {
           </button>
         </form>
 
+        {/* Quick login buttons */}
+        {mode === 'login' && (
+          <div className="mt-6 bg-[#131210] border border-white/7 rounded-lg p-4">
+            <p className="text-[10px] tracking-[0.15em] uppercase text-muted mb-3 text-center">Dang nhap nhanh</p>
+            <div className="grid grid-cols-3 gap-2">
+              {[
+                { label: 'Quan ly', icon: '👔', email: 'manager@maison.com', color: '#c8a96e' },
+                { label: 'Khach hang', icon: '👤', email: 'customer@maison.com', color: '#68b5a0' },
+                { label: 'Xuong SX', icon: '🏭', email: 'workshop@maison.com', color: '#a0c8e8' },
+              ].map(acc => (
+                <button
+                  key={acc.email}
+                  type="button"
+                  onClick={() => { setEmail(acc.email); setPassword('maison123'); setError('') }}
+                  className="py-3 rounded border border-white/7 hover:border-current text-center transition-all"
+                  style={{ color: acc.color }}
+                >
+                  <span className="text-lg block mb-1">{acc.icon}</span>
+                  <span className="text-[10px] tracking-[0.05em] block">{acc.label}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
         {/* Back to home */}
         <div className="text-center mt-6">
           <a href="/" className="text-[12px] text-muted hover:text-[#c8a96e] transition-colors">
